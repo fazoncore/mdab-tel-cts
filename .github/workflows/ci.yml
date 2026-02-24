@@ -1,0 +1,37 @@
+name: mdab-tel-cts-ci
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+jobs:
+  cts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r telemetry_cts/requirements.txt
+
+      - name: Validate schemas
+        run: |
+          python telemetry_cts/ct/validate_schema.py
+
+      - name: Run chain verifier (audit)
+        run: |
+          python telemetry_cts/ct/run_chain_verifier.py --profile audit telemetry_cts/fixtures/tel/tel-stream-valid.jsonl
+
+      - name: Run chain verifier (ha)
+        run: |
+          python telemetry_cts/ct/run_chain_verifier.py --profile ha telemetry_cts/fixtures/tel/tel-stream-signed-valid.jsonl
