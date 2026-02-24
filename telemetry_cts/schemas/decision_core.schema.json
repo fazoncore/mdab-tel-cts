@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/mdab/v0.1/decision_core.schema.json",
+  "title": "MDAB v0.1 decision_core",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "spec_version",
+    "profile",
+    "policy_hash",
+    "input_hash",
+    "outcome",
+    "reason_code"
+  ],
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "const": "MDAB-CTS-0.1"
+    },
+    "profile": {
+      "type": "string",
+      "enum": [
+        "CORE",
+        "TIMEAWARE"
+      ]
+    },
+    "policy_hash": {
+      "$ref": "#/$defs/sha256"
+    },
+    "input_hash": {
+      "$ref": "#/$defs/sha256"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "DENY",
+        "ESCALATE"
+      ]
+    },
+    "reason_code": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_]{2,128}$"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

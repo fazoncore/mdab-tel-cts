@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/mdab/v0.1/checkpoint_event.schema.json",
+  "title": "MDAB Telemetry CheckpointEvent v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "event_version",
+    "event_type",
+    "event_id",
+    "ts_utc",
+    "emitter",
+    "seq",
+    "prev_event_hash",
+    "checkpoint",
+    "event_hash"
+  ],
+  "properties": {
+    "event_version": {
+      "type": "string",
+      "const": "MDAB-TEL-0.1"
+    },
+    "event_type": {
+      "type": "string",
+      "const": "CHECKPOINT"
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 64
+    },
+    "ts_utc": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.*Z$"
+    },
+    "emitter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "service",
+        "instance_id",
+        "env",
+        "region"
+      ],
+      "properties": {
+        "service": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "instance_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "env": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "region": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        }
+      }
+    },
+    "seq": {
+      "$ref": "#/$defs/int64u"
+    },
+    "prev_event_hash": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "range_start_seq",
+        "range_end_seq",
+        "last_event_hash",
+        "block_hash"
+      ],
+      "properties": {
+        "range_start_seq": {
+          "$ref": "#/$defs/int64u"
+        },
+        "range_end_seq": {
+          "$ref": "#/$defs/int64u"
+        },
+        "last_event_hash": {
+          "$ref": "#/$defs/sha256"
+        },
+        "block_hash": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "ref"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "WORM_OBJECT_STORE",
+            "TRANSPARENCY_LOG",
+            "GIT_TAG"
+          ]
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      }
+    },
+    "event_hash": {
+      "$ref": "#/$defs/sha256"
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alg",
+        "key_id",
+        "sig_b64"
+      ],
+      "properties": {
+        "alg": {
+          "type": "string",
+          "enum": [
+            "ed25519"
+          ]
+        },
+        "key_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "sig_b64": {
+          "type": "string",
+          "minLength": 16,
+          "maxLength": 2048
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "int64u": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9223372036854775807
+    }
+  }
+}

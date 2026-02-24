@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/mdab/v0.1/decision_event.ha.schema.json",
+  "title": "MDAB Telemetry DecisionEvent v0.1 (HighAssurance)",
+  "allOf": [
+    {
+      "$ref": "decision_event.schema.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "signature"
+      ]
+    }
+  ]
+}

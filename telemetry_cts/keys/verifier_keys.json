@@ -1,0 +1,28 @@
+{
+  "version": "MDAB-KEYS-0.1",
+  "keys": [
+    {
+      "key_id": "k-prod-2026-01",
+      "alg": "ed25519",
+      "public_key_b64": "e7nxhvAkCkY9dghAh4xwlfp4NqbxynIv2pvIJtrz8/A=",
+      "not_before_utc": "2026-01-01T00:00:00Z",
+      "not_after_utc": "2027-01-01T00:00:00Z",
+      "status": "ACTIVE"
+    },
+    {
+      "key_id": "k-expired-2025-01",
+      "alg": "ed25519",
+      "public_key_b64": "A9uPvFTipHeYfWs6ZoRpHyuc4QB2Z2KLjtP3gTme+vo=",
+      "not_before_utc": "2025-01-01T00:00:00Z",
+      "not_after_utc": "2026-02-01T00:00:00Z",
+      "status": "ACTIVE"
+    }
+  ],
+  "revocations": [
+    {
+      "key_id": "k-revoked-2025-11",
+      "revoked_at_utc": "2026-02-01T00:00:00Z",
+      "reason": "key rotation"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+MDAB v0.1 — Telemetry Event Schema & CTS
+
+This repository contains a deterministic telemetry schema (MDAB-TEL v0.1),
+a chain verifier and conformance test suite (CTS), fixtures (valid/tamper/signed),
+and Appendix A guidance for conformance claims.
+
+Copyright 2026

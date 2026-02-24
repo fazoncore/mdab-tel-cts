@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use MDAB v0.1 Telemetry CTS, please cite it as below."
+title: "MDAB v0.1 — Telemetry Event Schema & Conformance Test Suite"
+version: "0.1.0"
+date-released: "2026-02-24"
+license: "Apache-2.0"
+authors:
+  - name: "FAZON / MDAB Contributors"
+abstract: "Deterministic telemetry schema (MDAB-TEL v0.1), chain verifier, and conformance fixtures for reproducible audit and tamper detection."

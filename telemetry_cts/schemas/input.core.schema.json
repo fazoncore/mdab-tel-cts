@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/mdab/v0.1/input.core.schema.json",
+  "title": "MDAB v0.1 Input (CORE profile)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "subject",
+    "action",
+    "tool_class"
+  ],
+  "properties": {
+    "tool_class": {
+      "$ref": "#/$defs/identifier"
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "subject": {
+      "$ref": "#/$defs/subject"
+    },
+    "eval_time": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.*Z$"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_:\\-\\.]{1,64}$"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        },
+        "authority": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            {
+              "type": "object",
+              "additionalProperties": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

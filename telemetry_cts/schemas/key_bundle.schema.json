@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/mdab/v0.1/key_bundle.schema.json",
+  "title": "MDAB Key Bundle v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "keys"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "MDAB-KEYS-0.1"
+    },
+    "keys": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/key"
+      }
+    },
+    "revocations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/revocation"
+      }
+    }
+  },
+  "$defs": {
+    "key": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key_id",
+        "alg",
+        "public_key_b64",
+        "not_before_utc",
+        "not_after_utc",
+        "status"
+      ],
+      "properties": {
+        "key_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "alg": {
+          "type": "string",
+          "enum": [
+            "ed25519"
+          ]
+        },
+        "public_key_b64": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "not_before_utc": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.*Z$"
+        },
+        "not_after_utc": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.*Z$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "REVOKED",
+            "RETIRED"
+          ]
+        }
+      }
+    },
+    "revocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key_id",
+        "revoked_at_utc",
+        "reason"
+      ],
+      "properties": {
+        "key_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "revoked_at_utc": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T.*Z$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      }
+    }
+  }
+}
