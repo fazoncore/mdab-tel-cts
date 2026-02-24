@@ -1,5 +1,5 @@
 # MDAB v0.1 — Telemetry Event Schema & CTS (GitHub-ready)
-
+Zenodo DOI: https://doi.org/10.5281/zenodo.18763066
 This repository provides a **deterministic telemetry event schema (MDAB-TEL v0.1)**,
 plus a **Chain Verifier** and **Conformance Test Suite (CTS)** with **valid / tamper / signed (HA)** fixtures.
 
