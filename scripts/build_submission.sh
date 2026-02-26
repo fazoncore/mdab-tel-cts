@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
+# --- release guard: require exact git tag ---
+TAG_EXPECTED="${1:-}"
+if [ -z "$TAG_EXPECTED" ]; then
+  echo "USAGE: $0 <tag>"
+  exit 2
+fi
+TAG_ACTUAL="$(git describe --tags --exact-match 2>/dev/null || true)"
+if [ "$TAG_ACTUAL" != "$TAG_EXPECTED" ]; then
+  echo "FAIL: must run on exact tag $TAG_EXPECTED (got: $TAG_ACTUAL)"
+  exit 2
+fi
+# --- end guard ---
 # build_submission.sh
 # Builds a standard-grade submission bundle from the repo:
 #  - creates dist/<BUNDLE_DIR>/ with selected artifacts
