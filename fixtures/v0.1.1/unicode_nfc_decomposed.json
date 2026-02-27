@@ -1,0 +1,5 @@
+{
+  "spec_version": "0.1.1",
+  "event_type": "mdab.tel.fixture.unicode_nfc",
+  "payload": { "text": "cafe\u0301" }
+}

@@ -1,0 +1,5 @@
+{
+  "spec_version": "0.1.1",
+  "event_type": "mdab.tel.fixture.numbers",
+  "payload": { "n0": 0, "n1": 1, "n9": 9, "n10": 10, "neg": -1 }
+}
