@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18763066.svg)](https://doi.org/10.5281/zenodo.18763066)
 # MDAB v0.1 — Telemetry Event Schema & CTS (GitHub-ready)
 Zenodo DOI: https://doi.org/10.5281/zenodo.18763066
 This repository provides a **deterministic telemetry event schema (MDAB-TEL v0.1)**,
